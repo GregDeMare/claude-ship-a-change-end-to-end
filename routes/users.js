@@ -32,7 +32,7 @@ router.get("/:id", (req, res) => {
 
 // POST /users — create a user; name and a valid email are required
 router.post("/", (req, res) => {
-  const { name, email } = req.body;
+  const { name, email } = req.body || {};
 
   if (!isValidUserInput({ name, email })) {
     return res
@@ -47,7 +47,7 @@ router.post("/", (req, res) => {
 // PUT /users/:id — update a user; name and a valid email are required, 404 if missing
 router.put("/:id", (req, res) => {
   const id = Number(req.params.id);
-  const { name, email } = req.body;
+  const { name, email } = req.body || {};
 
   if (!Number.isInteger(id)) {
     return res.status(400).json({ error: "id must be an integer" });
